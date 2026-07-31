@@ -14,11 +14,12 @@ ENV AIRFLOW__CORE__LOAD_EXAMPLES=True
 EOF
 ```
 
-### Собираем образ
 
+### Собираем образ
 ```bash
 docker build -t airflow-examples .
 ```
+
 
 ### Запускаем контейнер
 ```bash
@@ -29,6 +30,7 @@ docker run -d \
   airflow standalone
 ```
 
+
  ### Ждем 10 минут
 
 
@@ -36,6 +38,7 @@ docker run -d \
  ```bash
    docker logs airflow-webserver 2>&1 | grep "password:"
  ```
+
 
  ### В любимом браузере: 
    http://localhost:8080
@@ -67,7 +70,9 @@ cat << 'EOF' > Dockerfile.mlflow
   ### Создаем папку для локального хранения метрик и артефактов
   ```bash
     mkdir -p mlruns
-    
+  ```
+### Запускаем контейнер
+```bash
     docker run -d \
       --name mlflow-server \
       -p 5001:5000 \
