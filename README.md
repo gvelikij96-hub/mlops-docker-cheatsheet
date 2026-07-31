@@ -1,21 +1,20 @@
-### mlops-docker-cheatsheet
-### MLOps Docker Setup: Airflow & MLflow
+# mlops-docker-cheatsheet
+## MLOps Docker Setup: Airflow & MLflow
 
 
-## Airflow
+### Airflow
 Создаем любимым способом директорию и переходим в нее
-# Создаем минимальный Dockerfile
+### Создаем минимальный Dockerfile
 cat << 'EOF' > Dockerfile
 FROM apache/airflow:2.9.3-python3.10
 ENV AIRFLOW__CORE__LOAD_EXAMPLES=True
 EOF
 
-
-# Собираем образ
+### Собираем образ
 docker build -t airflow-examples .
 
 
-# Запускаем контейнер
+### Запускаем контейнер
 docker run -d \
   --name airflow-webserver \
   -p 8080:8080 \
@@ -23,28 +22,30 @@ docker run -d \
   airflow standalone
 
 
- # Ждем 10 минут
+ ### Ждем 10 минут
 
 
- # Узнаем сгенерированный пароль
+ ### Узнаем сгенерированный пароль
    docker logs airflow-webserver 2>&1 | grep "password:"
 
- # В любимом браузере: 
+ ### В любимом браузере: 
    http://localhost:8080
    Login: admin
    Password: (из логов выше)
 
-  # Очистка
+ ### Очистка
   docker stop airflow-webserver && docker rm airflow-webserver && docker rmi airflow-examples
 
 
-  ## MLflow
+  ### MLflow
   Создаем любимым способом директорию и переходим в нее
 
-  # Создаем Dockerfile для MLflow
-  ```cat << 'EOF' > Dockerfile.mlflow
+  ### Создаем Dockerfile для MLflow
+  ```bash
+cat << 'EOF' > Dockerfile.mlflow
   FROM ghcr.io/mlflow/mlflow:v2.14.3
-  EOF```
+  EOF
+```
 
   # Билдим образ
   docker build -t mlflow-server -f Dockerfile.mlflow .
