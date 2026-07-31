@@ -77,3 +77,13 @@ cat << 'EOF' > Dockerfile.mlflow
    ```bash
 docker exec mlflow-server sh -c 'python -c "import mlflow; mlflow.set_experiment(\"Demo\"); [mlflow.start_run() or mlflow.log_metric(\"acc\", 0.9) or mlflow.end_run() for _ in range(3)]"'
 ```
+   ### В любимом браузере: 
+   
+    **Откройте веб-интерфейс** в любимом браузере:
+   http://localhost:5001
+
+
+    ### Очистка
+   ```bash
+docker stop mlflow-server && docker rm mlflow-server && docker rmi mlflow-server
+```
