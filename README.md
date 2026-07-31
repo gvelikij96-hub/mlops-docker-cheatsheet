@@ -5,14 +5,18 @@
 ### Airflow
 Создаем любимым способом директорию и переходим в нее
 ### Создаем минимальный Dockerfile
+```bash
 cat << 'EOF' > Dockerfile
 FROM apache/airflow:2.9.3-python3.10
 ENV AIRFLOW__CORE__LOAD_EXAMPLES=True
 EOF
+```
 
 ### Собираем образ
-docker build -t airflow-examples .
 
+```bash
+docker build -t airflow-examples .
+```
 
 ### Запускаем контейнер
 docker run -d \
