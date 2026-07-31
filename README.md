@@ -57,12 +57,12 @@ cat << 'EOF' > Dockerfile.mlflow
   EOF
 ```
 
-  # Билдим образ
+  ### Билдим образ
   ```bash
   docker build -t mlflow-server -f Dockerfile.mlflow .
 ```
 
-  # Создаем папку для локального хранения метрик и артефактов
+  ### Создаем папку для локального хранения метрик и артефактов
   ```bash
     mkdir -p mlruns
     
@@ -72,4 +72,8 @@ cat << 'EOF' > Dockerfile.mlflow
       -v $(pwd)/mlruns:/mlruns \
       mlflow-server \
       mlflow server --host 0.0.0.0 --port 5000
+   ```
+   ### Добавление демо-данных
+   ```bash
+docker exec mlflow-server sh -c 'python -c "import mlflow; mlflow.set_experiment(\"Demo\"); [mlflow.start_run() or mlflow.log_metric(\"acc\", 0.9) or mlflow.end_run() for _ in range(3)]"'
 ```
