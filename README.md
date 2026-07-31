@@ -4,6 +4,8 @@
 
 ### Airflow
 Создаем любимым способом директорию и переходим в нее
+
+
 ### Создаем минимальный Dockerfile
 ```bash
 cat << 'EOF' > Dockerfile
@@ -33,7 +35,7 @@ docker run -d \
  ### Узнаем сгенерированный пароль
  ```bash
    docker logs airflow-webserver 2>&1 | grep "password:"
-```
+ ```
 
  ### В любимом браузере: 
    http://localhost:8080
@@ -77,13 +79,12 @@ cat << 'EOF' > Dockerfile.mlflow
    ```bash
 docker exec mlflow-server sh -c 'python -c "import mlflow; mlflow.set_experiment(\"Demo\"); [mlflow.start_run() or mlflow.log_metric(\"acc\", 0.9) or mlflow.end_run() for _ in range(3)]"'
 ```
-   ### В любимом браузере: 
-   
-    **Откройте веб-интерфейс** в любимом браузере:
+ ### В любимом браузере: 
    http://localhost:5001
 
+   
+ ### Очистка
 
-    ### Очистка
    ```bash
-docker stop mlflow-server && docker rm mlflow-server && docker rmi mlflow-server
-```
+      docker stop mlflow-server && docker rm mlflow-server && docker rmi mlflow-server
+   ```
