@@ -19,27 +19,33 @@ docker build -t airflow-examples .
 ```
 
 ### Запускаем контейнер
+```bash
 docker run -d \
   --name airflow-webserver \
   -p 8080:8080 \
   airflow-examples \
   airflow standalone
-
+```
 
  ### Ждем 10 минут
 
 
  ### Узнаем сгенерированный пароль
+ ```bash
    docker logs airflow-webserver 2>&1 | grep "password:"
+```
 
  ### В любимом браузере: 
    http://localhost:8080
+   
    Login: admin
+   
    Password: (из логов выше)
 
  ### Очистка
+ ```bash
   docker stop airflow-webserver && docker rm airflow-webserver && docker rmi airflow-examples
-
+```
 
   ### MLflow
   Создаем любимым способом директорию и переходим в нее
@@ -52,9 +58,12 @@ cat << 'EOF' > Dockerfile.mlflow
 ```
 
   # Билдим образ
+  ```bash
   docker build -t mlflow-server -f Dockerfile.mlflow .
+```
 
   # Создаем папку для локального хранения метрик и артефактов
+  ```bash
     mkdir -p mlruns
     
     docker run -d \
@@ -63,3 +72,4 @@ cat << 'EOF' > Dockerfile.mlflow
       -v $(pwd)/mlruns:/mlruns \
       mlflow-server \
       mlflow server --host 0.0.0.0 --port 5000
+```
